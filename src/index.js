@@ -8,8 +8,8 @@ function App() {
 }
 
 function CounterDate() {
-  const [step, setStep] = useState(5);
-  const [counter, setCounter] = useState(step);
+  const [step, setStep] = useState(1);
+  const [counter, setCounter] = useState(0);
 
   const message =
     counter > 0
@@ -20,22 +20,44 @@ function CounterDate() {
 
   const newDate = new Date(Date.now() + counter * (24 * 60 * 60 * 1000));
 
+  function resetCounter() {
+    setStep(1);
+    setCounter(0);
+  }
+
   return (
-    <div className="container">
-      <div className="wrapper">
-        <button onClick={() => setStep((s) => s - 1)}>-</button>
-        <p>Step: {step}</p>
-        <button onClick={() => setStep((s) => s + 1)}>+</button>
+    <>
+      <div className="container">
+        <div className="wrapper">
+          <input
+            type="range"
+            min="0"
+            max="10"
+            value={step}
+            onChange={(e) => setStep(+e.target.value)}
+          />
+          <p>{step}</p>
+        </div>
+        <div className="wrapper">
+          <button onClick={() => setCounter((c) => c - step)}>-</button>
+          <input
+            type="text"
+            value={counter}
+            onChange={(e) => setCounter(+e.target.value)}
+          />
+          <button onClick={() => setCounter((c) => c + step)}>+</button>
+        </div>
+        <p>
+          {counter !== 0 && Math.abs(counter)} {message}{" "}
+          {newDate.toDateString()}
+        </p>
       </div>
-      <div className="wrapper">
-        <button onClick={() => setCounter((c) => c - step)}>-</button>
-        <p>Count: {counter}</p>
-        <button onClick={() => setCounter((c) => c + step)}>+</button>
-      </div>
-      <p>
-        {counter !== 0 && Math.abs(counter)} {message} {newDate.toDateString()}
-      </p>
-    </div>
+      {(counter !== 0 || step !== 1) && (
+        <button className="resetBtn" onClick={resetCounter}>
+          Reset
+        </button>
+      )}
+    </>
   );
 }
 

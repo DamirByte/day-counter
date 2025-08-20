@@ -15,6 +15,13 @@ code {
     monospace;
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .container {
   background: #fff;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
@@ -38,7 +45,7 @@ code {
   gap: 18px;
 }
 
-.wrapper button {
+button {
   padding: 10px 24px;
   font-size: 1.6rem;
   border: none;
@@ -52,15 +59,29 @@ code {
   outline: none;
 }
 
-.wrapper button:hover,
-.wrapper button:focus {
+button:hover,
+button:focus {
   background: #1d4ed8;
   transform: translateY(-2px) scale(1.04);
 }
 
-.wrapper button:active {
+button:active {
   background: #1e40af;
   transform: scale(0.98);
+}
+
+button.resetBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.2s ease;
+  background-color: orangered;
+  font-size: 20px;
+}
+
+button.resetBtn:hover {
+  /* opacity: 0.8; */
+  background-color: red;
 }
 
 .wrapper p {
